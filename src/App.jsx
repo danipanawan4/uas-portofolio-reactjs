@@ -20,6 +20,24 @@ function App() {
 getAllData();
   },[]);
 
+
+  async function fetchData() {
+    try {
+      let res =await fetch(`${API_URL}/products`)
+      let data = await res.json()
+      SetData(data)
+
+      console.log(data)
+    } catch (erorr){
+      console.log(erorr)
+    }
+    
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[])
+
   // display data
   async function getAllData(){
     const response = await axios.get(API_URL);
