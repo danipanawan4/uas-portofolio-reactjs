@@ -254,18 +254,12 @@ getAllData();
       <label className='font-semibold'>Nama Lengkap</label>
       <input type="text" name='nama' placeholder='Masukan Nama...' className='border border-zinc-500 p-2 rounded-md' required/>
     </div>
-    <div className='flex flex-col gap-2'>
-      <label className='font-semibold'>Alamat</label>
-      <input type="text" name='nama' placeholder='Masukan Alamat...' className='border border-zinc-500 p-2 rounded-md' required/>
-    </div>
+    
     <div className='flex flex-col gap-2'>
       <label className='font-semibold ' >Email</label>
       <input type="email" name='email' placeholder='Masukan Email...' className='border border-zinc-500 p-2 rounded-md' required/>
     </div>
-    <div className='flex flex-col gap-2'>
-      <label className='font-semibold'>Nomor Telpon</label>
-      <input type="text" name='nama' placeholder='Masukan Nomor...' className='border border-zinc-500 p-2 rounded-md' required/>
-    </div>
+    
     <div className='flex flex-col gap-2'>
       <label htmlFor='pesan' className='font-semibold'>Pesan</label>
       <textarea name="pesan" id="pesan" cols="45" rows="7" placeholder='Pesan...' className='border border-zinc-500 p-2 rounded-md' required></textarea>
