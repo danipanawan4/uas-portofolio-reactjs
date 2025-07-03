@@ -60,21 +60,22 @@ const Navbar = () => {
       </ul>
 
       {/* Tombol Sign In & Sign Up */}
-      <div className="hidden md:flex items-center gap-3">
-        <a
-          href="/login"
-          className="bg-white text-black font-semibold px-5 py-2 rounded-xl shadow hover:bg-gray-200 transition duration-300"
-        >
-          Sign In
-        </a>
-        <a
-          href="/register"
-          className="bg-blue-500 text-white font-semibold px-5 py-2 rounded-xl hover:bg-blue-600 transition duration-300"
-        >
-          Sign Up
-        </a>
-      </div>
-    </div>
+      {/* Tombol Sign In & Sign Up */}
+<div className="flex flex-col sm:flex-row items-center gap-3 md:gap-3">
+  <a
+    href="/login"
+    className="bg-white text-black font-semibold px-5 py-2 rounded-xl shadow hover:bg-gray-200 transition duration-300 w-full sm:w-auto text-center"
+  >
+    Sign In
+  </a>
+  <a
+    href="/register"
+    className="bg-blue-500 text-white font-semibold px-5 py-2 rounded-xl hover:bg-blue-600 transition duration-300 w-full sm:w-auto text-center"
+  >
+    Sign Up
+  </a>
+</div>
+</div>
   );
 };
 
