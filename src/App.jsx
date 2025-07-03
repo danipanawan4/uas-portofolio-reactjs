@@ -255,7 +255,7 @@ function App() {
       <div className="grid sm:grid-cols-2 gap-4">
 
         
-       <div className='flex flex-col gap-2'>
+       <div className='flex flex-col gap-2' id="data">
         <label htmlFor='komen' className='font-semibold'>Nama</label>
           <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan Nama..." value={form.nama}
           onChange={(e) => setForm({ ...form, nama: e.target.value })} required />
@@ -329,16 +329,23 @@ function App() {
               <td className="p-2">{user.prodi}</td>
               <td className="p-2">{user.komentar}</td>
               <td className="p-2 text-center space-x-2">
-                <button
+                <a href="#data">
+                  <button
                   onClick={() => handleEdit(user)}
-                  className="text-yellow-500 hover:underline"
+                  className="bg-blue-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full font-semibold transition"
                   title="Edit"
-                >✏️</button>
-                <button
+                > Edit</button>
+                </a>
+
+                <div className='mt-3'>
+                  <button
                   onClick={() => handleDelete(user.id)}
-                  className="text-red-500 hover:underline"
+                  className="bg-red-600 hover:bg-rose-400 text-white px-6 py-3 rounded-full font-semibold transition"
                   title="Hapus"
-                >🗑️</button>
+                > Hapus</button>
+                </div>
+
+                
               </td>
             </tr>
           ))}
