@@ -244,57 +244,90 @@ function App() {
         <div className="mt-3 py-10" id=''></div>
 
 
-       <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white py-12 p-3 rounded-2xl shadow-lg space-y-2 mb-5">
+      <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white py-6 px-3 rounded-2xl shadow-lg space-y-4 mb-5">
   <div className="max-w-4xl mx-auto">
-    <h1 className="text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-10">
+    <h1 className="text-2xl sm:text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-6 sm:mb-10">
       📊 Silahkan Isi Data Diri Anda
     </h1>
 
     {/* Form */}
-    <form onSubmit={handleSubmit} className="bg-violet-300 dark:bg-white-800 p-8 rounded-2xl shadow-lg space-y-6 mb-12">
-      <div className="grid sm:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="bg-violet-300 dark:bg-white-800 p-4 sm:p-8 rounded-2xl shadow-lg space-y-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Nama */}
+        <div className="flex flex-col gap-2" id="data">
+          <label htmlFor="nama" className="font-semibold">Nama</label>
+          <input
+            className="bg-zinc-200 p-3 rounded-xl shadow-inner w-full"
+            placeholder="Masukan Nama..."
+            value={form.nama}
+            onChange={(e) => setForm({ ...form, nama: e.target.value })}
+            required
+          />
+        </div>
 
-        
-       <div className='flex flex-col gap-2' id="data">
-        <label htmlFor='komen' className='font-semibold'>Nama</label>
-          <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan Nama..." value={form.nama}
-          onChange={(e) => setForm({ ...form, nama: e.target.value })} required />
-       </div>
-      
-       
-       <div className='flex flex-col gap-2'>
-         <label htmlFor='komen' className='font-semibold'>Email</label>
-         <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" type="Masukan email..." placeholder="Email" value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })} required />
-       </div>
+        {/* Email */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email" className="font-semibold">Email</label>
+          <input
+            type="email"
+            className="bg-zinc-200 p-3 rounded-xl shadow-inner w-full"
+            placeholder="Masukan Email..."
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            required
+          />
+        </div>
 
-          <div className='flex flex-col gap-2'>
-              <label htmlFor='komen' className='font-semibold'>Alamat</label>
-               <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan Alamat..." value={form.alamat}
-          onChange={(e) => setForm({ ...form, alamat: e.target.value })} required />
-          </div>
-  
+        {/* Alamat */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="alamat" className="font-semibold">Alamat</label>
+          <input
+            className="bg-zinc-200 p-3 rounded-xl shadow-inner w-full"
+            placeholder="Masukan Alamat..."
+            value={form.alamat}
+            onChange={(e) => setForm({ ...form, alamat: e.target.value })}
+            required
+          />
+        </div>
 
-          <div className='flex flex-col gap-2'>
-            <label htmlFor='komen' className='font-semibold'>NIM Mahasiswa</label>
-        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan NIM..." value={form.nim}
-          onChange={(e) => setForm({ ...form, nim: e.target.value })} required />
-          </div>
-          
+        {/* NIM */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="nim" className="font-semibold">NIM Mahasiswa</label>
+          <input
+            className="bg-zinc-200 p-3 rounded-xl shadow-inner w-full"
+            placeholder="Masukan NIM..."
+            value={form.nim}
+            onChange={(e) => setForm({ ...form, nim: e.target.value })}
+            required
+          />
+        </div>
 
-          <div className='flex flex-col gap-2'>
-            <label htmlFor='komen' className='font-semibold'>Program Studi</label>
-             <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Maukan Program Studi..." value={form.prodi}
-          onChange={(e) => setForm({ ...form, prodi: e.target.value })} required />
-          </div>
-         
-         <div className='flex flex-col gap-2'>
-          <label htmlFor='komen' className='font-semibold'>Komentar</label>
-          <textarea className="flex flex-col gap-2 input-style bg-zinc-200 p-2 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="SIlahkan Masukan Komentar..." rows="4" value={form.komentar}
-          onChange={(e) => setForm({ ...form, komentar: e.target.value })} required /></div> 
-        
-         
+        {/* Prodi */}
+        <div className="flex flex-col gap-2">
+          <label htmlFor="prodi" className="font-semibold">Program Studi</label>
+          <input
+            className="bg-zinc-200 p-3 rounded-xl shadow-inner w-full"
+            placeholder="Masukan Program Studi..."
+            value={form.prodi}
+            onChange={(e) => setForm({ ...form, prodi: e.target.value })}
+            required
+          />
+        </div>
+
+        {/* Komentar */}
+        <div className="flex flex-col gap-2 sm:col-span-2">
+          <label htmlFor="komentar" className="font-semibold">Komentar</label>
+          <textarea
+            className="bg-zinc-200 p-3 rounded-xl shadow-inner w-full"
+            rows="4"
+            placeholder="Silahkan Masukan Komentar..."
+            value={form.komentar}
+            onChange={(e) => setForm({ ...form, komentar: e.target.value })}
+            required
+          />
+        </div>
       </div>
+
       <div className="text-center">
         <button
           type="submit"
@@ -305,52 +338,53 @@ function App() {
       </div>
     </form>
 
-    {/* Tabel */}
-    <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-   <div className='data-pengguna text-center text-4xl font-bold mb-2' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-      <h3>Data Pengunjung Website</h3>
-</div>
-      <div className="proyek-box mt-4 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-         <ul>
-            {
-              users.map((user)=>(
-              <li>
-              <div className='flex flex-wrap gap-2 mt-10'>
-                <div className='text-white text-2xl py-1 px-3 bg-blue-400 rounded-lg font-semibold'>
-                  {user.nama}
-                  </div>
-                  </div>
-              <div className='flex flex-col gap-2'>
-                <div> 
-                {user.email}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {user.alamat}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {user.nim}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {user.prodi}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-                </div>
-
-                <div className='mt-3 font-bold'>Komentar</div>
-
-                <div className='text-justify bg-zinc-100 mt-2 py-1 px-3 rounded-lg'>
-                {user.komentar}
-                </div>
-                 <div className='flex items-center sm:gap-4 gap-2 mt-2'>
-                <a href='#data' className='text-white font-bold edit bg-yellow-500 p-3 rounded-lg block  hover:bg-yellow-400' onClick={()=>handleEdit(user)}>Edit</a>
-                <i></i>
-                  <a href='#data' className='text-white font-bold delete bg-red-700 p-3 rounded-lg block  hover:bg-red-600' onClick={()=>handleDelete(user.id)}>Delete</a>
-                </div>  
-                
-              
-            </li>
-              ))
-            }
-
-          </ul>
+    {/* Tabel Responsif */}
+    <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 sm:p-6">
+      <div
+        className="text-center text-2xl sm:text-4xl font-bold mb-4"
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-once="true"
+      >
+        <h3>Data Pengunjung Website</h3>
       </div>
-         
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {users.map((user) => (
+          <div key={user.id} className="bg-zinc-100 p-4 rounded-xl shadow space-y-2">
+            <div className="bg-blue-400 text-white px-3 py-1 rounded-lg text-lg font-semibold w-fit">
+              {user.nama}
+            </div>
+            <div className="text-sm space-y-1">
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Alamat:</strong> {user.alamat}</p>
+              <p><strong>NIM:</strong> {user.nim}</p>
+              <p><strong>Prodi:</strong> {user.prodi}</p>
+            </div>
+            <div>
+              <div className="mt-2 font-bold">Komentar</div>
+              <div className="bg-white p-2 rounded-lg text-justify">{user.komentar}</div>
+            </div>
+            <div className="flex justify-start gap-2 mt-2">
+              <button
+                className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 rounded-lg font-bold"
+                onClick={() => handleEdit(user)}
+              >
+                Edit
+              </button>
+              <button
+                className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold"
+                onClick={() => handleDelete(user.id)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </div>
+</div>
 </div>
 
     </>
