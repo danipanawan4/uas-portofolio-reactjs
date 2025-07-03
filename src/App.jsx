@@ -83,7 +83,7 @@ function App() {
     <div className="hero grid md:grid-cols-2 items-center pt-10 xl:gap-0 gap-6 grid-cols-1">
       <div className='animate__animated animate__fadeInUp animate__delay-3s'>
         <div className='flex items-center gap-3 mb-6 bg-zinc-800 w-fit p-4 rounded-2xl'>
-          <img src={DataImage.HeroImage} alt="Hero Image" className='w-10 rounded-md' loading='lazy'/>
+          <img src={DataImage.HeroImage} alt="Hero Image" className='w-10 h-10 rounded-full object-cover' loading='lazy'/>
           <q>Kata yang indah, akan menghasilkan senyuman yang indah juga😁</q>
         </div>
         <h1 className='text-5xl/tight font-bold mb-6'>Hai, Nama Saya Dani Panawan</h1>
@@ -106,15 +106,14 @@ function App() {
             </a>
           </div>
       </div>
-      <img src={DataImage.HeroImage} alt="Hero Image" className='w-[500px] md:ml-auto 
-      animate__animated animate__fadeInUp animate__delay-4s' loading='lazy'/>
+     <img src={DataImage.HeroImage} alt="Hero Image" className='w-[500px] h-[500px] rounded-full object-cover md:ml-auto animate__animated animate__fadeInUp animate__delay-4s' loading='lazy'/>
     </div>
 
     {/* tentang */}
      <div className="tentang mt-32 py-10" id='tentang'>
       <div className='xl:w-2/3 lg:2-3/4 w-full mx-auto p-7 bg-zinc-800 rounded-lg'
       data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-      <img src={DataImage.HeroImage} alt="Image" className='w-12 rounded-md mb-10 sm:hidden' loading='lazy'/>
+        <h1 className='text-center text-4xl/snug font-bold mb-4 text-blue-600' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">About Me</h1>
         <p className='text-base/loose mb-10'>
           Halo guys, perkenalkan nama saya Dani Panawan, Saya seorang mahasiswa disalah satu perguruan tinggi dipurwokerto yaitu STMIK Widya Utama.
           Saya kuliah dengan jurusan Prodi Teknik Informatika jenjang Sarjana. Saya sangat suka dengan Pemrograman dan Designer.
@@ -133,7 +132,7 @@ function App() {
           "Sebaik-baiknya Manusia Adalah yang Bisa memberikan Manfaat kepada orang lain".
         </p>
         <div className='flex items-center justify-between'>
-          <img src={DataImage.HeroImage} alt="Image" className='w-12 rounded-md sm:block hidden' loading='lazy'/>
+          <img src={DataImage.HeroImage} alt="Image" className='w-12 h-12 rounded-full object-cover sm:block hidden' loading='lazy'/>
           <div className='flex items-center gap-6'>
             <div>
               <h1 className='text-4xl mb-1'>
