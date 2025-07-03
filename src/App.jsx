@@ -233,16 +233,12 @@ function App() {
 
 
 
-
-      {/* Hero section */}
-      {/* ... SEMUA KODE TAMPILAN (yang tidak diubah) seperti hero, tentang, proyek ... */}
-
       {/* DataBase Section */}
       <div className="database mt-32 py-10" id='database'>
         <div className='tools mt-32 '>
-          <h1 className='text-4xl/snug font-bold mb-4'>Data Base Pengunjung Website</h1>
+          <h1 className='text-4xl/snug font-bold mb-4'>Riwayat Pengunjung Website</h1>
           <p className='xl:w-2/5 lg:w-2/4 md:w-2/3 sm:w-3/4 w-full text-base/loose opacity-50'>
-            Halo guys, terimakasih sudah mau berkunjung ke website saya. Silahkan kalau berkenan bisa bantu isi data diri anda dan masukan komentar buat website ya...
+            Halo guys, terimakasih sudah mau berkunjung ke website saya. Silahkan kalau berkenan bisa bantu isi data diri anda dan masukan komentar buat website ini ya...
           </p>
         </div>
         <div className="mt-3 py-10" id=''></div>
@@ -251,7 +247,7 @@ function App() {
        <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white py-12 p-3 rounded-2xl shadow-lg space-y-2 mb-5">
   <div className="max-w-4xl mx-auto">
     <h1 className="text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-10">
-      📊 Data Pengunjung Website
+      📊 Silahkan Isi Data Pengunjung Website
     </h1>
 
     {/* Form */}
