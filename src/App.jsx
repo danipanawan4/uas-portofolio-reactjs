@@ -366,12 +366,17 @@ function App() {
               <div className="bg-white p-2 rounded-lg text-justify">{user.komentar}</div>
             </div>
             <div className="flex justify-start gap-2 mt-2">
-              <button
+
+              <a href="#data">
+                  <button
                 className="bg-yellow-500 hover:bg-yellow-400 text-white px-4 py-2 rounded-lg font-bold"
                 onClick={() => handleEdit(user)}
               >
                 Edit
               </button>
+              </a>
+            
+
               <button
                 className="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-bold"
                 onClick={() => handleDelete(user.id)}
