@@ -1,126 +1,85 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import DataImage from './data';
-import {listTools, listProyek} from "./data";
+import { listTools, listProyek } from "./data";
 import axios from 'axios';
+import React from "react";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [alamat, setAlamat] = useState('');
-  const [nim, setNim] = useState('');
-  const [prodi, setProdi] = useState('');
-  const [notelpon, setNotelpon] = useState('');
-  const [komen, setKomen] = useState('');
+  const [form, setForm] = useState({
+    nama: '',
+    email: '',
+    alamat: '',
+    nim: '',
+    prodi: '',
+    komentar: ''
+  });
+  const [editId, setEditId] = useState(null);
 
-  const [userEdit, setUserEdit] = useState(null);
-
-  const API_URL = import.meta.env.VITE_API_URL;
-  useEffect(()=>{
-getAllData();
-  },[]);
-
-
-  async function fetchData() {
+  const fetchUsers = async () => {
     try {
-      let res =await fetch(`${API_URL}/products`)
-      let data = await res.json()
-      SetData(data)
-
-      console.log(data)
-    } catch (erorr){
-      console.log(erorr)
+      const res = await axios.get(`${API_BASE_URL}/users`);
+      setUsers(res.data);
+    } catch (error) {
+      console.error('Gagal mengambil data:', error);
     }
-    
-  }
+  };
 
-  useEffect(()=>{
-    fetchData()
-  },[])
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-  // display data
-  async function getAllData(){
-    const response = await axios.get(API_URL);
-    setUsers(response.data);
-    console.log(response.data);
-  }
-
-  //tambah data
-
-  async function addData(e){
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name || !email || !alamat || !nim || !prodi || !notelpon || !komen){
-      return;
+    try {
+      if (editId) {
+        await axios.put(`${API_BASE_URL}/users/${editId}`, form);
+        setEditId(null);
+      } else {
+        await axios.post(`${API_BASE_URL}/users`, form);
+      }
+      setForm({
+        nama: '',
+        email: '',
+        alamat: '',
+        nim: '',
+        prodi: '',
+        komentar: ''
+      });
+      fetchUsers();
+    } catch (error) {
+      console.error('Terjadi kesalahan saat menyimpan data:', error);
     }
+  };
 
-    const response = await axios.post(API_URL,{name, email, alamat, nim, prodi, notelpon, komen});
-    setName('');
-    setEmail('');
-    setAlamat('');
-    setNim('');
-    setProdi('');
-    setNotelpon('');
-    setKomen('');
-    getAllData();
-    
-  }
+  const handleEdit = (user) => {
+    setForm({
+      nama: user.nama,
+      email: user.email,
+      alamat: user.alamat,
+      nim: user.nim,
+      prodi: user.prodi,
+      komentar: user.komentar
+    });
+    setEditId(user.id);
+  };
 
-  // edit data
-
-  function editData(data){
-    setUserEdit(data);
-    setName(data.name);
-    setEmail(data.email);
-    setAlamat(data.alamat);
-    setNim(data.nim);
-    setProdi(data.prodi);
-    setNotelpon(data.notelpon);
-    setKomen(data.komen);
-  }
-
-  // update data
-
-  async function updateData(e){
-    e.preventDefault();
-    if (!name || !email || !alamat || !nim || !prodi || !notelpon || !komen){
-      return;
+  const handleDelete = async (id) => {
+    if (confirm('Yakin ingin menghapus data ini?')) {
+      try {
+        await axios.delete(`${API_BASE_URL}/users/${id}`);
+        fetchUsers();
+      } catch (error) {
+        console.error('Gagal menghapus data:', error);
+      }
     }
-
-    const response = await axios.put(API_URL+"/"+userEdit.id,{name, email, alamat, nim, prodi, notelpon, komen});
-    setName('');
-    setEmail('');
-    setAlamat('');
-    setNim('');
-    setProdi('');
-    setNotelpon('');
-    setKomen('');
-    getAllData();
-    setUserEdit(null);
-    
-  }
-
-  // handleclick
-
-  async function handleClick(e){
-    e.preventDefault();
-    if(userEdit){
-      await updateData(e);
-    }else{
-      await addData(e);
-    }
-
-  }
-
-  //delete data
-  async function deleteData(id) {
-    const response = await axios.delete(API_URL+"/"+id);
-    getAllData();
-  }
-
-
+  };
 
   return (
     <>
+
     <div className="hero grid md:grid-cols-2 items-center pt-10 xl:gap-0 gap-6 grid-cols-1">
       <div className='animate__animated animate__fadeInUp animate__delay-3s'>
         <div className='flex items-center gap-3 mb-6 bg-zinc-800 w-fit p-4 rounded-2xl'>
@@ -273,123 +232,108 @@ getAllData();
   </form>
 </div>
 
-{/* Kontak */}
 
-{/* DataBase*/}
-<div className="database mt-32 py-10" id='database'>
-      <div className='tools mt-32'>
-        <h1 className='text-4xl/snug font-bold mb-4' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Data Base Pengunjung Website</h1>
-        <p className='xl:w-2/5 lg:w-2/4 md:w-2/3 sm:w-3/4 w-full text-base/loose opacity-50' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-        Halo guys, terimakasih sudah mau berkunjung ke website saya. Silahkan kalau berkenan bisa bantu isi data diri anda dan masukan komentar buat website ya...</p>
+
+
+      {/* Hero section */}
+      {/* ... SEMUA KODE TAMPILAN (yang tidak diubah) seperti hero, tentang, proyek ... */}
+
+      {/* DataBase Section */}
+      <div className="database mt-32 py-10" id='database'>
+        <div className='tools mt-32 '>
+          <h1 className='text-4xl/snug font-bold mb-4'>Data Base Pengunjung Website</h1>
+          <p className='xl:w-2/5 lg:w-2/4 md:w-2/3 sm:w-3/4 w-full text-base/loose opacity-50'>
+            Halo guys, terimakasih sudah mau berkunjung ke website saya. Silahkan kalau berkenan bisa bantu isi data diri anda dan masukan komentar buat website ya...
+          </p>
         </div>
-        <div className='tools mt-20'> 
-        <h1 className='text-3xl mb-2 font-bold text-center' data-aos="fade-up" data-aos-duration="1000">DAFTAR RIWAYAT HIDUP</h1>
-    </div>
+        <div className="mt-3 py-10" id=''></div>
 
-   <div className='flex flex-col gap-2'>
-<h3 className='text-2xl text-center font-bold mb-2' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" id='database1'>{userEdit? 'Edit Pengunjung' : 'Tambah Pengunjung'}</h3>
-        <form className='bg-zinc-700 p-10 sm:w-fit w-full mx-auto rounded-md' autoComplete='off' data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" data-aos-once="true" type='submit' onSubmit={handleClick}>
-         
-         <div className='flex flex-col gap-6'>
-          <div className='flex flex-col gap-2'>
-            <input type="text" name='nama' placeholder='Nama...' className='border border-white-800 p-2 rounded-md' value={name} onChange={(e)=>
-              setName(e.target.value)
-            } required/>
-          </div>
-          
-          <div className='flex flex-col gap-2'>
-            <input type="email" name='email' placeholder='Email...' className='border border-white-800 p-2 rounded-md' value={email} onChange={(e)=>
-              setEmail(e.target.value)} required/>
-          </div>
 
-           <div className='flex flex-col gap-2'>
-            <input type="text" name='alamat' placeholder='Alamat...' className='border border-white-800 p-2 rounded-md' value={alamat} onChange={(e)=>
-              setAlamat(e.target.value)} required/>
-          </div>
+       <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white py-12 p-3 rounded-2xl shadow-lg space-y-2 mb-5">
+  <div className="max-w-4xl mx-auto">
+    <h1 className="text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-10">
+      📊 Data Pengunjung Website
+    </h1>
 
-           <div className='flex flex-col gap-2'>
-            <input type="text" name='nim' placeholder='NIM...' className='border border-white-800 p-2 rounded-md' value={nim} onChange={(e)=>
-              setNim(e.target.value)} required/>
-          </div>
-
-           <div className='flex flex-col gap-2'>
-            <input type="text" name='prodi' placeholder='Prodi...' className='border border-white-800 p-2 rounded-md' value={prodi} onChange={(e)=>
-              setProdi(e.target.value)} required/>
-          </div>
-
-          
-           <div className='flex flex-col gap-2'>
-            <input type="text" name='notelpon' placeholder='No Telpon...' className='border border-white-800 p-2 rounded-md' value={notelpon} onChange={(e)=>
-              setNotelpon(e.target.value)} required/>
-          </div>
-
-          <div className='flex flex-col gap-2'> 
-          <label htmlFor='komen' className='font-semibold'>Komentar</label>
-          <textarea name="komen" id="komen" cols="45" rows="7" placeholder='Silahkan Masukan Komentar Anda...' className='border border-zinc-500 p-2 rounded-md' value={komen} onChange={(e)=>
-              setKomen(e.target.value)} required></textarea>
-         </div>
-
-        <div className='text-center'>
-            <button type='submit' className='bg-blue-500 p-3 rounded-lg w-full cursor-pointer border border-zinc-600 hover:bg-blue-700'>{userEdit?'Update Data':'Save Data'}</button>
-          </div>
-          </div>
-          </form>
-          </div>
-
-<br />
-<br />
-<br />
-      <div className='data-pengguna text-3xl font-bold mb-2' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-      <h3>Data Pengunjung Website</h3>
-</div>
-      <div className="proyek-box mt-5 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
-         <ul>
-            {
-              users.map((user)=>(
-              <li>
-              <div className='flex flex-wrap gap-2 mt-10'>
-                <div className='py-1 px-3 border border-zinc-500 bg-blue-600 rounded-md font-semibold'>
-                  {user.name}
-                  </div>
-                  </div>
-              <div className='flex flex-col gap-6'>
-                <div> 
-                {user.email}&nbsp;&nbsp;&nbsp;
-                {user.alamat}&nbsp;&nbsp;&nbsp;
-                {user.nim}&nbsp;&nbsp;&nbsp;
-                {user.prodi}&nbsp;&nbsp;&nbsp;
-                {user.notelpon}&nbsp;&nbsp;&nbsp;
-                </div>
-                </div>
-
-                <div className='border border-zinc-500 py-1 px-3 rounded-md mt-2'>
-                {user.komen}
-                </div>
-                
-              
-              <div className='flex items-center sm:gap-4 gap-2 mt-2'>
-                <a href='#database1' className='edit bg-cyan-500 p-3 rounded-lg block border border-cyan-400 hover:bg-cyan-400' onClick={()=>editData(user)}>Edit</a>
-                <i></i>
-                  <a href='#database1' className='delete bg-red-700 p-3 rounded-lg block border border-red-600 hover:bg-red-600' onClick={()=>deleteData(user.id)}>Delete</a>
-                </div>  
-                
-              
-            </li>
-              ))
-            }
-
-          </ul>
-      </div>
-         
-      </div>
-
-    
-   
+    {/* Form */}
+    <form onSubmit={handleSubmit} className="bg-violet-300 dark:bg-white-800 p-8 rounded-2xl shadow-lg space-y-6 mb-12">
+      <div className="grid sm:grid-cols-2 gap-4">
+        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Nama" value={form.nama}
+          onChange={(e) => setForm({ ...form, nama: e.target.value })} required />
+        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" type="email" placeholder="Email" value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })} required />
+        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Alamat" value={form.alamat}
+          onChange={(e) => setForm({ ...form, alamat: e.target.value })} required />
+        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="NIM Mahasiswa" value={form.nim}
+          onChange={(e) => setForm({ ...form, nim: e.target.value })} required />
+          <textarea className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Komentar" rows="4" value={form.komentar}
+          onChange={(e) => setForm({ ...form, komentar: e.target.value })} required />
+        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-10 mb-32" placeholder="Program Studi" value={form.prodi}
+          onChange={(e) => setForm({ ...form, prodi: e.target.value })} required />
         
-{/* DataBase*/}
+      </div>
+      <div className="text-center">
+        <button
+          type="submit"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold transition"
+        >
+          {editId ? '🔄 Update Data' : '➕ Tambah Data'}
+        </button>
+      </div>
+    </form>
 
+    {/* Tabel */}
+    <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+      <table className="w-full table-auto text-sm">
+        <thead className="bg-indigo-600 text-white rounded">
+          <tr>
+            <th className="p-3 text-left">Nama</th>
+            <th className="p-3 text-left">Email</th>
+            <th className="p-3 text-left">Alamat</th>
+            <th className="p-3 text-left">NIM</th>
+            <th className="p-3 text-left">Prodi</th>
+            <th className="p-3 text-left">Komentar</th>
+            <th className="p-3 text-center">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id} className="border-t dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
+              <td className="p-2">{user.nama}</td>
+              <td className="p-2">{user.email}</td>
+              <td className="p-2">{user.alamat}</td>
+              <td className="p-2">{user.nim}</td>
+              <td className="p-2">{user.prodi}</td>
+              <td className="p-2">{user.komentar}</td>
+              <td className="p-2 text-center space-x-2">
+                <button
+                  onClick={() => handleEdit(user)}
+                  className="text-yellow-500 hover:underline"
+                  title="Edit"
+                >✏️</button>
+                <button
+                  onClick={() => handleDelete(user.id)}
+                  className="text-red-500 hover:underline"
+                  title="Hapus"
+                >🗑️</button>
+              </td>
+            </tr>
+          ))}
+          {users.length === 0 && (
+            <tr>
+              <td colSpan="7" className="p-4 text-center text-gray-500 dark:text-gray-400">
+                Tidak ada data pengunjung.
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
