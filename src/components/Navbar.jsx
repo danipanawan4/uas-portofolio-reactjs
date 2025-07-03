@@ -18,7 +18,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="navbar py-7 flex items-center justify-between relative z-50">
+    <div className="navbar py-7 px-5 flex items-center justify-between relative z-50">
       {/* Logo */}
       <div className="logo">
         <h1 className="text-3xl font-bold bg-white text-black p-1 md:bg-transparent md:text-white">
@@ -59,17 +59,17 @@ const Navbar = () => {
         </li>
       </ul>
 
-      {/* Tombol Sign In / Sign Up */}
+      {/* Tombol Sign In & Sign Up */}
       <div className="hidden md:flex items-center gap-3">
         <a
-          href="/signin"
-          className="text-sm font-medium px-4 py-2 border border-white text-white rounded-xl hover:bg-white hover:text-black transition"
+          href="/login"
+          className="bg-white text-black font-semibold px-5 py-2 rounded-xl shadow hover:bg-gray-200 transition duration-300"
         >
           Sign In
         </a>
         <a
-          href="/signup"
-          className="text-sm font-medium px-4 py-2 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition"
+          href="/register"
+          className="bg-blue-500 text-white font-semibold px-5 py-2 rounded-xl hover:bg-blue-600 transition duration-300"
         >
           Sign Up
         </a>
