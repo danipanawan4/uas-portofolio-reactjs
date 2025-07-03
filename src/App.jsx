@@ -247,7 +247,7 @@ function App() {
        <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white py-12 p-3 rounded-2xl shadow-lg space-y-2 mb-5">
   <div className="max-w-4xl mx-auto">
     <h1 className="text-4xl font-bold text-center text-indigo-600 dark:text-indigo-400 mb-10">
-      📊 Silahkan Isi Data Pengunjung Website
+      📊 Silahkan Isi Data Diri Anda
     </h1>
 
     {/* Form */}
