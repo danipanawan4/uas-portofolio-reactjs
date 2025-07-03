@@ -307,61 +307,52 @@ function App() {
 
     {/* Tabel */}
     <div className="overflow-x-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-      <table className="w-full table-auto text-sm">
-        <thead className="bg-indigo-600 text-white rounded">
-          <tr>
-            <th className="p-3 text-left">Nama</th>
-            <th className="p-3 text-left">Email</th>
-            <th className="p-3 text-left">Alamat</th>
-            <th className="p-3 text-left">NIM</th>
-            <th className="p-3 text-left">Prodi</th>
-            <th className="p-3 text-left">Komentar</th>
-            <th className="p-3 text-center">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="border-t dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700">
-              <td className="p-2">{user.nama}</td>
-              <td className="p-2">{user.email}</td>
-              <td className="p-2">{user.alamat}</td>
-              <td className="p-2">{user.nim}</td>
-              <td className="p-2">{user.prodi}</td>
-              <td className="p-2">{user.komentar}</td>
-              <td className="p-2 text-center space-x-2">
-                <a href="#data">
-                  <button
-                  onClick={() => handleEdit(user)}
-                  className="bg-blue-600 hover:bg-cyan-500 text-white px-6 py-3 rounded-full font-semibold transition"
-                  title="Edit"
-                > Edit</button>
-                </a>
-
-                <div className='mt-3'>
-                  <button
-                  onClick={() => handleDelete(user.id)}
-                  className="bg-red-600 hover:bg-rose-400 text-white px-6 py-3 rounded-full font-semibold transition"
-                  title="Hapus"
-                > Hapus</button>
+   <div className='data-pengguna text-center text-4xl font-bold mb-2' data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+      <h3>Data Pengunjung Website</h3>
+</div>
+      <div className="proyek-box mt-4 grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
+         <ul>
+            {
+              users.map((user)=>(
+              <li>
+              <div className='flex flex-wrap gap-2 mt-10'>
+                <div className='text-white text-2xl py-1 px-3 bg-blue-400 rounded-lg font-semibold'>
+                  {user.nama}
+                  </div>
+                  </div>
+              <div className='flex flex-col gap-2'>
+                <div> 
+                {user.email}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {user.alamat}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {user.nim}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {user.prodi}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
                 </div>
 
+                <div className='mt-3 font-bold'>Komentar</div>
+
+                <div className='text-justify bg-zinc-100 mt-2 py-1 px-3 rounded-lg'>
+                {user.komentar}
+                </div>
+                 <div className='flex items-center sm:gap-4 gap-2 mt-2'>
+                <a href='#data' className='text-white font-bold edit bg-yellow-500 p-3 rounded-lg block  hover:bg-yellow-400' onClick={()=>handleEdit(user)}>Edit</a>
+                <i></i>
+                  <a href='#data' className='text-white font-bold delete bg-red-700 p-3 rounded-lg block  hover:bg-red-600' onClick={()=>handleDelete(user.id)}>Delete</a>
+                </div>  
                 
-              </td>
-            </tr>
-          ))}
-          {users.length === 0 && (
-            <tr>
-              <td colSpan="7" className="p-4 text-center text-gray-500 dark:text-gray-400">
-                Tidak ada data pengunjung.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+              
+            </li>
+              ))
+            }
+
+          </ul>
+      </div>
+         
+      </div>
     </div>
   </div>
 </div>
-</div>
+
     </>
   );
 }
