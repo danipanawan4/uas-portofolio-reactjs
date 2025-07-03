@@ -253,19 +253,47 @@ function App() {
     {/* Form */}
     <form onSubmit={handleSubmit} className="bg-violet-300 dark:bg-white-800 p-8 rounded-2xl shadow-lg space-y-6 mb-12">
       <div className="grid sm:grid-cols-2 gap-4">
-        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Nama" value={form.nama}
-          onChange={(e) => setForm({ ...form, nama: e.target.value })} required />
-        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" type="email" placeholder="Email" value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })} required />
-        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Alamat" value={form.alamat}
-          onChange={(e) => setForm({ ...form, alamat: e.target.value })} required />
-        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="NIM Mahasiswa" value={form.nim}
-          onChange={(e) => setForm({ ...form, nim: e.target.value })} required />
-          <textarea className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Komentar" rows="4" value={form.komentar}
-          onChange={(e) => setForm({ ...form, komentar: e.target.value })} required />
-        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-10 mb-32" placeholder="Program Studi" value={form.prodi}
-          onChange={(e) => setForm({ ...form, prodi: e.target.value })} required />
+
         
+       <div className='flex flex-col gap-2'>
+        <label htmlFor='komen' className='font-semibold'>Nama</label>
+          <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan Nama..." value={form.nama}
+          onChange={(e) => setForm({ ...form, nama: e.target.value })} required />
+       </div>
+      
+       
+       <div className='flex flex-col gap-2'>
+         <label htmlFor='komen' className='font-semibold'>Email</label>
+         <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" type="Masukan email..." placeholder="Email" value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })} required />
+       </div>
+
+          <div className='flex flex-col gap-2'>
+              <label htmlFor='komen' className='font-semibold'>Alamat</label>
+               <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan Alamat..." value={form.alamat}
+          onChange={(e) => setForm({ ...form, alamat: e.target.value })} required />
+          </div>
+  
+
+          <div className='flex flex-col gap-2'>
+            <label htmlFor='komen' className='font-semibold'>NIM Mahasiswa</label>
+        <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Masukan NIM..." value={form.nim}
+          onChange={(e) => setForm({ ...form, nim: e.target.value })} required />
+          </div>
+          
+
+          <div className='flex flex-col gap-2'>
+            <label htmlFor='komen' className='font-semibold'>Program Studi</label>
+             <input className="input-style bg-zinc-200 p-3 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="Maukan Program Studi..." value={form.prodi}
+          onChange={(e) => setForm({ ...form, prodi: e.target.value })} required />
+          </div>
+         
+         <div className='flex flex-col gap-2'>
+          <label htmlFor='komen' className='font-semibold'>Komentar</label>
+          <textarea className="flex flex-col gap-2 input-style bg-zinc-200 p-2 rounded-2xl shadow-lg space-y-2 mb-5" placeholder="SIlahkan Masukan Komentar..." rows="4" value={form.komentar}
+          onChange={(e) => setForm({ ...form, komentar: e.target.value })} required /></div> 
+        
+         
       </div>
       <div className="text-center">
         <button
