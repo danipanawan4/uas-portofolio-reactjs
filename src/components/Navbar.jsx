@@ -1,81 +1,93 @@
 import { useState, useEffect } from "react";
-import React from "react";
+import { Menu, X } from "lucide-react"; // Pakai lucide-react untuk ikon
 
 const Navbar = () => {
-  const [active, setActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 150) {
-        setActive(true);
-      } else {
-        setActive(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="navbar py-7 px-5 flex items-center justify-between relative z-50">
-      {/* Logo */}
-      <div className="logo">
-        <h1 className="text-3xl font-bold bg-white text-black p-1 md:bg-transparent md:text-white">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 px-4 py-4 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 dark:bg-gray-900/80 shadow-md backdrop-blur-md"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <h1 className="text-2xl font-bold text-black dark:text-white">
           My-Portofolio
         </h1>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-8 text-gray-700 dark:text-white font-medium">
+          <li><a href="#beranda" className="hover:text-indigo-600">Beranda</a></li>
+          <li><a href="#tentang" className="hover:text-indigo-600">Tentang</a></li>
+          <li><a href="#proyek" className="hover:text-indigo-600">Project</a></li>
+          <li><a href="#kontak" className="hover:text-indigo-600">Contact</a></li>
+          <li><a href="#database" className="hover:text-indigo-600">Riwayat</a></li>
+        </ul>
+
+        {/* Tombol Auth Desktop */}
+        <div className="hidden md:flex gap-3">
+          <a
+            href="/login"
+            className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+          >
+            Sign In
+          </a>
+          <a
+            href="/register"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700"
+          >
+            Sign Up
+          </a>
+        </div>
+
+        {/* Burger Icon */}
+        <button
+          className="md:hidden text-black dark:text-white"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
 
-      {/* Menu */}
-      <ul
-        className={`menu flex items-center sm:gap-10 gap-4 md:static fixed left-1/2 -translate-x-1/2 md:-translate-x-0
-         md:opacity-100 bg-white/30 backdrop-blur-md p-4 rounded-br-2xl rounded-bl-2xl md:bg-transparent transition-all md:transition-none z-40
-         ${active ? "top-0 opacity-100" : "-top-10 opacity-0"}`}
-      >
-        <li>
-          <a href="#beranda" className="sm:text-lg text-base font-medium">
-            Beranda
-          </a>
-        </li>
-        <li>
-          <a href="#tentang" className="sm:text-lg text-base font-medium">
-            Tentang
-          </a>
-        </li>
-        <li>
-          <a href="#proyek" className="sm:text-lg text-base font-medium">
-            Project
-          </a>
-        </li>
-        <li>
-          <a href="#kontak" className="sm:text-lg text-base font-medium">
-            Contact
-          </a>
-        </li>
-        <li>
-          <a href="#database" className="sm:text-lg text-base font-medium">
-            Riwayat
-          </a>
-        </li>
-      </ul>
-
-      {/* Tombol Sign In & Sign Up */}
-      {/* Tombol Sign In & Sign Up */}
-<div className="flex flex-col sm:flex-row items-center gap-3 md:gap-3">
-  <a
-    href="/login"
-    className="bg-white text-black font-semibold px-5 py-2 rounded-xl shadow hover:bg-gray-200 transition duration-300 w-full sm:w-auto text-center"
-  >
-    Sign In
-  </a>
-  <a
-    href="/register"
-    className="bg-blue-500 text-white font-semibold px-5 py-2 rounded-xl hover:bg-blue-600 transition duration-300 w-full sm:w-auto text-center"
-  >
-    Sign Up
-  </a>
-</div>
-</div>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden mt-4 space-y-4 bg-white dark:bg-gray-900 p-4 rounded-xl shadow">
+          <ul className="flex flex-col gap-4 text-gray-800 dark:text-white font-medium">
+            <li><a href="#beranda" onClick={() => setIsOpen(false)}>Beranda</a></li>
+            <li><a href="#tentang" onClick={() => setIsOpen(false)}>Tentang</a></li>
+            <li><a href="#proyek" onClick={() => setIsOpen(false)}>Project</a></li>
+            <li><a href="#kontak" onClick={() => setIsOpen(false)}>Contact</a></li>
+            <li><a href="#database" onClick={() => setIsOpen(false)}>Riwayat</a></li>
+          </ul>
+          <div className="flex flex-col gap-3 mt-4">
+            <a
+              href="/login"
+              className="bg-white text-black px-4 py-2 rounded-lg font-semibold text-center hover:bg-gray-200"
+            >
+              Sign In
+            </a>
+            <a
+              href="/register"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-center hover:bg-blue-700"
+            >
+              Sign Up
+            </a>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 
