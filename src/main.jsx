@@ -1,27 +1,28 @@
 import React from "react";
-
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import Navbar from './components/Navbar.jsx'
-import 'remixicon/fonts/remixicon.css'
-import Footer from './components/Footer.jsx'
-import PreLoader from './components/PreLoader.jsx'
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App.jsx';
+import Footer from './components/Footer.jsx';
+import PreLoader from './components/PreLoader.jsx';
+import 'remixicon/fonts/remixicon.css';
 import 'animate.css';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
+import 'aos/dist/aos.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Login';
+import Register from './components/Register.jsx';
+
 AOS.init();
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <PreLoader />
-    <div className='container mx-auto px-4'>
-      <Navbar />
-      <App />
-      <Footer/>
-    </div>
-    
-  </StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        
+      </Routes>
+    </Router>
+  </React.StrictMode>
+);

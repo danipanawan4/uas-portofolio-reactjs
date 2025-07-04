@@ -2,9 +2,15 @@ import { useEffect, useState } from 'react';
 import DataImage from './data';
 import { listTools, listProyek } from "./data";
 import axios from 'axios';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import PreLoader from './components/PreLoader';
 import React from "react";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+
+
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -26,6 +32,16 @@ function App() {
       console.error('Gagal mengambil data:', error);
     }
   };
+
+  // Fitur Login
+
+  useEffect(() => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+  if (!isLoggedIn) {
+    window.location.href = '/login';
+  }
+}, []);
+
 
   useEffect(() => {
     fetchUsers();
@@ -77,8 +93,13 @@ function App() {
     }
   };
 
+   
+
   return (
     <>
+    <Navbar />
+    
+    <PreLoader />
 
     <div className="hero grid md:grid-cols-2 items-center pt-10 xl:gap-0 gap-6 grid-cols-1">
       <div className='animate__animated animate__fadeInUp animate__delay-3s'>
@@ -392,8 +413,12 @@ function App() {
 </div>
 </div>
 
+<Footer />
+
     </>
   );
 }
+
+
 
 export default App;

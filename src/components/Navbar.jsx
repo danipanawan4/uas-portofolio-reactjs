@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react"; // Pakai lucide-react untuk ikon
+import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom"; // ✅ penting agar <Link> tidak error
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +25,7 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <h1 className="text-2xl font-bold text-black dark:text-white">
-          My-Portofolio
+          My Portofolio
         </h1>
 
         {/* Desktop Menu */}
@@ -36,20 +37,20 @@ const Navbar = () => {
           <li><a href="#database" className="hover:text-indigo-600">Riwayat</a></li>
         </ul>
 
-        {/* Tombol Auth Desktop */}
+        {/* Desktop Auth Buttons */}
         <div className="hidden md:flex gap-3">
-          <a
-            href="/login"
-            className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-200"
+          <Link
+            to="/login"
+            className="bg-white text-black px-4 py-2 rounded-xl font-semibold hover:bg-gray-200 transition"
           >
             Sign In
-          </a>
-          <a
-            href="/register"
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700"
+          </Link>
+          <Link
+            to="/register"
+            className="bg-blue-600 text-white px-4 py-2 rounded-xl font-semibold hover:bg-blue-700 transition"
           >
             Sign Up
-          </a>
+          </Link>
         </div>
 
         {/* Burger Icon */}
@@ -63,7 +64,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden mt-4 space-y-4 bg-white dark:bg-gray-900 p-4 rounded-xl shadow">
+        <div className="md:hidden mt-4 space-y-4 bg-white dark:bg-gray-900 p-4 rounded-xl shadow animate__animated animate__fadeInDown">
           <ul className="flex flex-col gap-4 text-gray-800 dark:text-white font-medium">
             <li><a href="#beranda" onClick={() => setIsOpen(false)}>Beranda</a></li>
             <li><a href="#tentang" onClick={() => setIsOpen(false)}>Tentang</a></li>
@@ -71,19 +72,33 @@ const Navbar = () => {
             <li><a href="#kontak" onClick={() => setIsOpen(false)}>Contact</a></li>
             <li><a href="#database" onClick={() => setIsOpen(false)}>Riwayat</a></li>
           </ul>
-          <div className="flex flex-col gap-3 mt-4">
-            <a
-              href="/login"
-              className="bg-white text-black px-4 py-2 rounded-lg font-semibold text-center hover:bg-gray-200"
+
+          <div className="flex flex-col gap-3 mt-6">
+            <Link
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className="bg-white text-black px-4 py-2 rounded-lg font-semibold text-center hover:bg-gray-200 transition"
             >
               Sign In
-            </a>
-            <a
-              href="/register"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-center hover:bg-blue-700"
+            </Link>
+
+            <Link
+              to="/register"
+              onClick={() => setIsOpen(false)}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-center font-semibold hover:bg-blue-700 transition"
             >
               Sign Up
-            </a>
+            </Link>
+
+            <button
+              onClick={() => {
+                localStorage.removeItem('isLoggedIn');
+                window.location.href = '/App.jsx';
+              }}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-600 transition"
+            >
+              Logout
+            </button>
           </div>
         </div>
       )}
